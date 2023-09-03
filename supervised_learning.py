@@ -96,6 +96,6 @@ def supervised(X_train, X_test, y_train, y_test, display=False, save=False):
 df = pd.read_csv('dataset/new_dataset.csv', low_memory=False)
 df.drop(['accident_index'], axis=1, inplace=True)
 
-X_tr, X_te, y_tr, y_te = train_test_split(df.drop('accident_severity', axis=1), df['accident_severity'], test_size=0.2)
+X_tr, X_te, y_tr, y_te = train_test_split(df.drop('accident_severity', axis=1), df['accident_severity'], test_size=0.2, stratify=df['accident_severity'])
 
 supervised(X_tr, X_te, y_tr, y_te, display=True, save=True)
