@@ -39,7 +39,6 @@ def create_kb(path: str, name: str):
     for index, row in vehicle.iterrows():
         v = f"vehicle(accident(\"{row['accident_index']}\"), {row['vehicle_reference']})"
         prolog_file.write(f"{v}.\n")
-        # prolog_file.write(f"vehicle_involved({vehicle_reference}, accident({row['accident_index']})).\n")
         prolog_file.write(f"vehicle_type({v}, {row['vehicle_type']}).\n")
         prolog_file.write(f"engine_capacity({v}, {row['engine_capacity_cc']}).\n")
         prolog_file.write(f"propulsion({v}, {row['propulsion_code']}).\n")

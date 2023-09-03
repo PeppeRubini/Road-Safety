@@ -12,7 +12,6 @@ def define_clause(kb_path: str, kb_name: str) -> Prolog:
     prolog.assertz("same_road_type(accident(A1), accident(A2)) :- road_type(accident(A1), RT), road_type(accident(A2), RT)")
     prolog.assertz("num_accident_in_same_road_type(accident(A1), N) :- findall(A2, same_road_type(accident(A1), accident(A2)), L), length(L, N)")
 
-    #TODO: rivedere
     prolog.assertz("same_road_class(accident(A1), accident(A2)) :- first_road_class(accident(A1), FC), first_road_class(accident(A2), FC)")
     prolog.assertz("same_road_number(accident(A1), accident(A2)) :- first_road_number(accident(A1), FN), first_road_number(accident(A2), FN)")
     prolog.assertz("same_road(accident(A1), accident(A2)) :- same_road_class(accident(A1), accident(A2)), same_road_number(accident(A1), accident(A2))")
@@ -22,7 +21,7 @@ def define_clause(kb_path: str, kb_name: str) -> Prolog:
     prolog.assertz("same_second_road_number(accident(A1), accident(A2)) :- second_road_number(accident(A1), SN), second_road_number(accident(A2), SN)")
     prolog.assertz("same_second_road(accident(A1), accident(A2)) :- same_second_road_class(accident(A1), accident(A2)), same_second_road_number(accident(A1), accident(A2))")
     prolog.assertz("num_accident_in_same_second_road(accident(A1), N) :- findall(A2, same_second_road(accident(A1), accident(A2)), L), length(L, N)")
-    #TODO: fine
+
     prolog.assertz("is_night(accident(A)) :- time(accident(A), T), (T >= 21; T =< 4)")
 
     prolog.assertz("is_casualty_child(casualty(accident(A), C)) :- casualty_age(casualty(accident(A), C), CA), CA =< 12")
