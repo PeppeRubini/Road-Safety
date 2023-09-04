@@ -1,9 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-NEW_ACCIDENT_PATH = 'dataset/accident-preprocessed.csv'
-NEW_VEHICLE_PATH = 'dataset/vehicle-preprocessed.csv'
-NEW_CASUALTY_PATH = 'dataset/casualty-preprocessed.csv'
+NEW_ACCIDENT_PATH = '../Dataset/accident-preprocessed.csv'
+NEW_VEHICLE_PATH = '../Dataset/vehicle-preprocessed.csv'
+NEW_CASUALTY_PATH = '../Dataset/casualty-preprocessed.csv'
 
 
 def plot_accident_location(accident: pd.DataFrame, save=False, show=True, color=False):
@@ -27,7 +27,7 @@ def plot_accident_location(accident: pd.DataFrame, save=False, show=True, color=
     if show:
         plt.show()
     if save:
-        plt.savefig("./plots/accident_location.png")
+        plt.savefig("../plots/accident_location.png")
     plt.close()
 
 
@@ -40,13 +40,13 @@ def stats(accident: pd.DataFrame, vehicle: pd.DataFrame, casualty: pd.DataFrame,
         print(stat_v)
         print(stat_c)
     if save:
-        stat_a.to_csv("accident_stat.csv")
-        stat_v.to_csv("vehicle_stat.csv")
-        stat_c.to_csv("casualty_stat.csv")
+        stat_a.to_csv("../Dataset/accident_stat.csv")
+        stat_v.to_csv("../Dataset/vehicle_stat.csv")
+        stat_c.to_csv("../Dataset/casualty_stat.csv")
 
 
 def code_label_dict(field_name: str, inverse=False) -> dict:
-    df_guide = pd.read_excel('./Dataset/Road-Safety-Open-Dataset-Data-Guide.xlsx')
+    df_guide = pd.read_excel('../Dataset/Road-Safety-Open-Dataset-Data-Guide.xlsx')
     d = {}
     for index, row in df_guide[df_guide['field name'] == field_name][['code/format', 'label']].iterrows():
         k = row['code/format']

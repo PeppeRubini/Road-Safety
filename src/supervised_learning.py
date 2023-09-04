@@ -4,8 +4,8 @@ from models import *
 
 
 def supervised(display: True, save: True):
-    path = "./report"
-    df = pd.read_csv('dataset/new_dataset.csv', low_memory=False)
+    path = "../report"
+    df = pd.read_csv('../Dataset/new_dataset.csv', low_memory=False)
     df.drop(['accident_index'], axis=1, inplace=True)
     y = df['accident_severity']
     X = df.drop(['accident_severity'], axis=1)

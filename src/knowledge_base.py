@@ -64,4 +64,4 @@ def create_kb(path: str, name: str):
     print("Knowledge base created!")
 
 
-create_kb("./", "kb.pl")
+create_kb("../Dataset", "kb.pl")

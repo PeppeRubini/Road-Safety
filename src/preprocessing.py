@@ -9,9 +9,9 @@ def preprocessing():
     casualty = pd.DataFrame()
     for i in range(16, 22):
         print(f"Reading 20{i}...")
-        a_df = pd.read_csv(f"./dataset/dft-road-casualty-statistics-accident-20{i}.csv", low_memory=False)
-        v_df = pd.read_csv(f"./dataset/dft-road-casualty-statistics-vehicle-20{i}.csv", low_memory=False)
-        c_df = pd.read_csv(f"./dataset/dft-road-casualty-statistics-casualty-20{i}.csv", low_memory=False)
+        a_df = pd.read_csv(f"../dataset/dft-road-casualty-statistics-accident-20{i}.csv", low_memory=False)
+        v_df = pd.read_csv(f"../dataset/dft-road-casualty-statistics-vehicle-20{i}.csv", low_memory=False)
+        c_df = pd.read_csv(f"../dataset/dft-road-casualty-statistics-casualty-20{i}.csv", low_memory=False)
         try:
             v.drop(['lsoa_of_driver'], axis=1, inplace=True)
             c.drop(['lsoa_of_casualty'], axis=1, inplace=True)

@@ -96,8 +96,8 @@ def query_to_dict_list(prolog: Prolog):
 
 
 print("Defining clauses...")
-p = define_clause("./", "kb.pl")
+p = define_clause("../Dataset", "kb.pl")
 print("Querying...")
 new_dataset = pd.DataFrame(query_to_dict_list(p))
-new_dataset.to_csv("./Dataset/new_dataset.csv", index=False)
+new_dataset.to_csv("../Dataset/new_dataset.csv", index=False)
 print("Done!")
