@@ -1,0 +1,14 @@
+KNN
+n_neighbors: 15
+weights: uniform
+metric: manhattan
+              precision    recall  f1-score   support
+
+           1       0.57      0.63      0.60      3351
+           2       0.44      0.39      0.41      3351
+           3       0.56      0.57      0.56      3351
+
+    accuracy                           0.53     10053
+   macro avg       0.52      0.53      0.53     10053
+weighted avg       0.52      0.53      0.53     10053
+

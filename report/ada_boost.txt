@@ -1,0 +1,14 @@
+Ada Boost
+n_estimators: 200
+learning_rate: 2
+estimator: LogisticRegression
+              precision    recall  f1-score   support
+
+           1       0.59      0.57      0.58      3351
+           2       0.45      0.49      0.47      3351
+           3       0.57      0.54      0.56      3351
+
+    accuracy                           0.53     10053
+   macro avg       0.54      0.53      0.53     10053
+weighted avg       0.54      0.53      0.53     10053
+

@@ -1,0 +1,14 @@
+Random Forest
+n_estimators: 300
+max_features: log2
+max_depth: 10
+              precision    recall  f1-score   support
+
+           1       0.59      0.67      0.63      3351
+           2       0.46      0.48      0.47      3351
+           3       0.62      0.51      0.56      3351
+
+    accuracy                           0.55     10053
+   macro avg       0.56      0.55      0.55     10053
+weighted avg       0.56      0.55      0.55     10053
+

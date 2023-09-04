@@ -1,0 +1,15 @@
+Decision Tree
+criteria: gini
+max_depth: 10
+min_samples_split: 2
+min_samples_leaf: 20
+              precision    recall  f1-score   support
+
+           1       0.58      0.59      0.59      3351
+           2       0.43      0.52      0.47      3351
+           3       0.60      0.48      0.53      3351
+
+    accuracy                           0.53     10053
+   macro avg       0.54      0.53      0.53     10053
+weighted avg       0.54      0.53      0.53     10053
+

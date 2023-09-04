@@ -1,0 +1,12 @@
+Naive Bayes
+var_smoothing: 2
+              precision    recall  f1-score   support
+
+           1       0.56      0.57      0.56      3351
+           2       0.43      0.53      0.48      3351
+           3       0.61      0.45      0.52      3351
+
+    accuracy                           0.52     10053
+   macro avg       0.53      0.52      0.52     10053
+weighted avg       0.53      0.52      0.52     10053
+
