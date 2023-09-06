@@ -1,5 +1,5 @@
 Logistic Regression
-C: 0.5
+C: 0.1
               precision    recall  f1-score   support
 
            1       0.58      0.59      0.58      3351

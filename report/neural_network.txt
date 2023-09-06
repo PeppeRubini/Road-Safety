@@ -1,14 +1,14 @@
 Neural Network
-Number of nodes: 64 32 3
-Epoch: 50
+Number of nodes: 32 16 3
+Epoch: 100
 Dropout probability: 0.5
               precision    recall  f1-score   support
 
-           0       0.59      0.68      0.63      3351
-           1       0.46      0.47      0.47      3351
-           2       0.63      0.52      0.57      3351
+           0       0.58      0.68      0.63      3351
+           1       0.47      0.47      0.47      3351
+           2       0.62      0.52      0.56      3351
 
-    accuracy                           0.56     10053
-   macro avg       0.56      0.56      0.55     10053
-weighted avg       0.56      0.56      0.55     10053
+    accuracy                           0.55     10053
+   macro avg       0.56      0.55      0.55     10053
+weighted avg       0.56      0.55      0.55     10053
 
