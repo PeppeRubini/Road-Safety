@@ -6,6 +6,16 @@ NEW_VEHICLE_PATH = '../Dataset/vehicle-preprocessed.csv'
 NEW_CASUALTY_PATH = '../Dataset/casualty-preprocessed.csv'
 
 
+def plot_accident_severity(accident: pd.DataFrame, save=True, show=False):
+    plt.pie(accident['accident_severity'].value_counts(), labels=['Slight', 'Serious', 'Fatal'], autopct='%1.1f%%')
+    plt.title("Accident Severity")
+    if show:
+        plt.show()
+    if save:
+        plt.savefig("../plots/accident_severity.png")
+    plt.close()
+
+
 def plot_accident_location(accident: pd.DataFrame, save=False, show=True, color=False):
     if color:
         plt.scatter(accident[accident["accident_severity"] == 1]['longitude'],
@@ -60,3 +70,16 @@ def code_label_dict(field_name: str, inverse=False) -> dict:
 def change_code_to_description_df(df: pd.DataFrame, inverse=False):
     for col in df.columns:
         df[col] = df[col].replace(code_label_dict(col, inverse))
+
+
+def cross_val_score_plot(score, name, save: True, display: False):
+    path = "../plots/"
+    plt.plot(range(1, 11), score)
+    plt.title(f"{name} Cross Validation Score")
+    plt.xlabel("k")
+    plt.ylabel("score")
+    if display:
+        plt.show()
+    if save:
+        plt.savefig(path + name + "_cross_val_score.png")
+    plt.close()

@@ -13,8 +13,8 @@ def preprocessing():
         v_df = pd.read_csv(f"../dataset/dft-road-casualty-statistics-vehicle-20{i}.csv", low_memory=False)
         c_df = pd.read_csv(f"../dataset/dft-road-casualty-statistics-casualty-20{i}.csv", low_memory=False)
         try:
-            v.drop(['lsoa_of_driver'], axis=1, inplace=True)
-            c.drop(['lsoa_of_casualty'], axis=1, inplace=True)
+            v_df.drop(['lsoa_of_driver'], axis=1, inplace=True)
+            c_df.drop(['lsoa_of_casualty'], axis=1, inplace=True)
         except:
             pass
         accident = pd.concat([accident, a_df], ignore_index=True)
@@ -28,11 +28,10 @@ def preprocessing():
                             'location_northing_osgr', 'local_authority_district', 'lsoa_of_accident_location']
     accident.drop(drop_column_accident, axis=1, inplace=True)
     column_check_na_accident = ['accident_index', 'accident_severity', 'number_of_vehicles', 'number_of_casualties',
-                                'date', 'time', 'local_authority_ons_district', 'road_type', 'speed_limit',
+                                'date', 'time', 'local_authority_ons_district', 'road_type',
                                 'light_conditions', 'weather_conditions', 'road_surface_conditions',
-                                'special_conditions_agit pt_site', 'carriageway_hazards', 'first_road_class',
-                                'first_road_number', 'second_road_class', 'second_road_number',
-                                'pedestrian_crossing_physical_facilities']
+                                'special_conditions_at_site', 'carriageway_hazards', 'first_road_class',
+                                'first_road_number', 'second_road_class', 'second_road_number']
     accident.dropna(subset=column_check_na_accident, inplace=True)
     accident = accident[accident['road_type'] != -1]
     accident = accident[accident['first_road_number'] != -1]
@@ -56,9 +55,9 @@ def preprocessing():
     column_check_na_casualty = ['accident_index', 'casualty_reference', 'casualty_severity', 'casualty_type']
     casualty.dropna(subset=column_check_na_casualty, inplace=True)
     casualty = casualty[~casualty['age_of_casualty'] < 0]
-
-    stats(accident, vehicle, casualty, save=True, display=False)
     print("Preprocessing done!")
+
+    plot_accident_severity(accident, save=False, show=True)
 
     print("Balancing data...")
     min_samples = accident['accident_severity'].value_counts().min()
@@ -71,6 +70,9 @@ def preprocessing():
     balanced_vehicle = vehicle[~vehicle['accident_index'].isin(deleted_rows)]
     balanced_casualty = casualty[~casualty['accident_index'].isin(deleted_rows)]
     print("Balancing done!")
+    stats(accident, vehicle, casualty, save=True, display=False)
+
+    plot_accident_severity(balanced_accident)
 
     return balanced_accident, balanced_vehicle, balanced_casualty
 
