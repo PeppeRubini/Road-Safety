@@ -59,7 +59,7 @@ label_kmeans = adjust_kmeans_labels(label_kmeans)
 s = "KMeans\n" + "y Labels Count:\n" + str(y.value_counts().sort_index()) + "\n" + "KMeans Labels Count:\n" + str(
     pd.Series(label_kmeans).value_counts().sort_index()) + "\n" + "Rand Index: " + str(
     rand_score(y, label_kmeans))
-# write s to file
+
 file = open("../report/unsupervised_learning.txt", "w")
 file.write(s)
 file.close()
