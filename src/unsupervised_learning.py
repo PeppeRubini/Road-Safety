@@ -17,7 +17,7 @@ def adjust_kmeans_labels(labels):
 
 
 def kmeans_clustering(X, n_clusters=3):
-    num_clusters_to_try = [2, 3, 4, 5]
+    num_clusters_to_try = [2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     silhouette_scores = []
     inertia_values = []

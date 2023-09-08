@@ -6,8 +6,8 @@ accident_severity
 3    3351
 Name: count, dtype: int64
 KMeans Labels Count:
-1    1669
-2    5820
-3    2564
+1    5820
+2    2564
+3    1669
 Name: count, dtype: int64
 Rand Index: 0.5253079292562788
