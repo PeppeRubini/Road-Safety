@@ -1,0 +1,13 @@
+KMeans
+y Labels Count:
+accident_severity
+1    3351
+2    3351
+3    3351
+Name: count, dtype: int64
+KMeans Labels Count:
+1    1669
+2    5820
+3    2564
+Name: count, dtype: int64
+Rand Index: 0.5253079292562788
