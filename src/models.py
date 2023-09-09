@@ -1,5 +1,5 @@
 from sklearn.model_selection import cross_val_predict, cross_val_score
-from sklearn.metrics import classification_report, accuracy_score
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.naive_bayes import GaussianNB
@@ -12,10 +12,11 @@ from keras.layers import Dense, Dropout
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import LabelEncoder
 from keras.wrappers.scikit_learn import KerasClassifier
-from utils import cross_val_score_plot
+from utils import cross_val_score_plot, confusion_matrix_plot
 import warnings
 
 warnings.filterwarnings('ignore')
+LABELS = [1, 2, 3]
 
 
 def decision_tree(X, y, k):
@@ -44,6 +45,7 @@ def decision_tree(X, y, k):
                         best_min_samples_leaf = min_samples_leaf
                         best_dtc = dtc
     cross_val_score_plot(cross_val_score(best_dtc, X, y, cv=k), "decision_tree", save=True, display=False)
+    confusion_matrix_plot(confusion_matrix(y, best_y_pred, labels=LABELS), LABELS, "decision_tree", save=True, display=False)
     report = classification_report(y, best_y_pred)
     return "Decision Tree\n" + "criteria: " + best_criterion + "\nmax_depth: " + str(
         best_max_depth) + "\nmin_samples_split: " + str(best_min_samples_split) + "\nmin_samples_leaf: " + str(
@@ -71,6 +73,7 @@ def knn(X, y, k):
                     best_metric = metric
                     best_knn = knn_model
     cross_val_score_plot(cross_val_score(best_knn, X, y, cv=k), "knn", save=True, display=False)
+    confusion_matrix_plot(confusion_matrix(y, best_y_pred, labels=LABELS), LABELS, "knn", save=True, display=False)
     report = classification_report(y, best_y_pred)
     return "KNN\n" + "n_neighbors: " + str(
         best_n_neighbors) + "\nweights: " + best_weights + "\nmetric: " + best_metric + "\n" + report + "\n"
@@ -91,6 +94,7 @@ def naive_bayes(X, y, k):
             best_var_smoothing = alpha
             best_nb = nb_model
     cross_val_score_plot(cross_val_score(best_nb, X, y, cv=k), "naive_bayes", save=True, display=False)
+    confusion_matrix_plot(confusion_matrix(y, best_y_pred, labels=LABELS), LABELS, "naive_bayes", save=True, display=False)
     report = classification_report(y, best_y_pred)
     return "Naive Bayes\n" + "var_smoothing: " + str(best_var_smoothing) + "\n" + report + "\n"
 
@@ -110,6 +114,7 @@ def log_regression(X, y, k):
             best_c = c
             best_lg = lg_model
     cross_val_score_plot(cross_val_score(best_lg, X, y, cv=k), "log_regression", save=True, display=False)
+    confusion_matrix_plot(confusion_matrix(y, best_y_pred, labels=LABELS), LABELS, "log_regression", save=True, display=False)
     report = classification_report(y, best_y_pred)
     return "Logistic Regression\n" + "C: " + str(best_c) + "\n" + report + "\n"
 
@@ -135,6 +140,7 @@ def svm(X, y, k):
                     best_gamma = gamma
                     best_svm = svm_model
     cross_val_score_plot(cross_val_score(best_svm, X, y, cv=k), "svm", save=True, display=False)
+    confusion_matrix_plot(confusion_matrix(y, best_y_pred, labels=LABELS), LABELS, "svm", save=True, display=False)
     report = classification_report(y, best_y_pred)
     return "SVM\n" + "C: " + str(best_c) + "\nkernel: " + best_kernel + "\ngamma: " + best_gamma + "\n" + report + "\n"
 
@@ -161,6 +167,7 @@ def random_forest(X, y, k):
                     best_max_depth = max_depth
                     best_rfc = rfc
     cross_val_score_plot(cross_val_score(best_rfc, X, y, cv=k), "random_forest", save=True, display=False)
+    confusion_matrix_plot(confusion_matrix(y, best_y_pred, labels=LABELS), LABELS, "random_forest", save=True, display=False)
     report = classification_report(y, best_y_pred)
     return "Random Forest\n" + "n_estimators: " + str(
         best_n_estimators) + "\nmax_features: " + best_max_features + "\nmax_depth: " + str(
@@ -189,6 +196,7 @@ def ada_boost(X, y, k):
                     best_estimator = str(estimator).split('(')[0]
                     best_ada = ada
     cross_val_score_plot(cross_val_score(best_ada, X, y, cv=k), "ada_boost", save=True, display=False)
+    confusion_matrix_plot(confusion_matrix(y, best_y_pred, labels=LABELS), LABELS, "ada_boost", save=True, display=False)
     report = classification_report(y, best_y_pred)
     return "Ada Boost\n" + "n_estimators: " + str(best_n_estimators) + "\nlearning_rate: " + str(
         best_learning_rate) + "\nestimator: " + best_estimator + "\n" + report + "\n"
@@ -231,9 +239,10 @@ def neural_network(X, y, k):
                     best_epoch = epoch
                     best_dropout_prob = dropout_prob
                     best_model = model
+    best_y_pred = encoder.inverse_transform(best_y_pred)
     cross_val_score_plot(cross_val_score(best_model, X, y_encoded, cv=kf), "neural_network", save=True, display=False)
-    report = classification_report(y_encoded, best_y_pred)
-
+    confusion_matrix_plot(confusion_matrix(y, best_y_pred, labels=LABELS), LABELS, "neural_network", save=True, display=False)
+    report = classification_report(y, best_y_pred)
     return "Neural Network\n" + "Number of nodes: " + str(best_num_nodes) + " " + str(int(
         best_num_nodes / 2)) + " 3" + "\nEpoch: " + str(best_epoch) + "\nDropout probability: " + str(
         best_dropout_prob) + "\n" + report + "\n"

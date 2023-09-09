@@ -1,9 +1,12 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.metrics import ConfusionMatrixDisplay
 
 NEW_ACCIDENT_PATH = '../Dataset/accident-preprocessed.csv'
 NEW_VEHICLE_PATH = '../Dataset/vehicle-preprocessed.csv'
 NEW_CASUALTY_PATH = '../Dataset/casualty-preprocessed.csv'
+
+PLOT_PATH = "../plots/"
 
 
 def plot_accident_severity(accident: pd.DataFrame, save=True, show=False):
@@ -73,7 +76,6 @@ def change_code_to_description_df(df: pd.DataFrame, inverse=False):
 
 
 def cross_val_score_plot(score, name, save: True, display: False):
-    path = "../plots/"
     plt.plot(range(1, 11), score)
     plt.title(f"{name} Cross Validation Score")
     plt.xlabel("k")
@@ -81,5 +83,15 @@ def cross_val_score_plot(score, name, save: True, display: False):
     if display:
         plt.show()
     if save:
-        plt.savefig(path + name + "_cross_val_score.png")
+        plt.savefig(PLOT_PATH + name + "_cross_val_score.png")
+    plt.close()
+
+
+def confusion_matrix_plot(confusion_matrix, labels, name, save: True, display: False):
+    cm = ConfusionMatrixDisplay(confusion_matrix, display_labels=labels)
+    cm.plot()
+    if display:
+        plt.show()
+    if save:
+        plt.savefig(PLOT_PATH + name + "_confusion_matrix.png")
     plt.close()
